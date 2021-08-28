@@ -1,4 +1,3 @@
-from os import name
 from flask import Flask, request
 from flask_restful import Api, Resource
 
@@ -15,7 +14,7 @@ class Item(Resource):
 
     def post(self, name):
         if next(filter(lambda x: x['name']==name, items), None):
-            return {'mesage': f'Item {name} already exist, can\'t be created!'}
+            return {'mesage': f'Item {name} already exist, can\'t be created, duplication is not allowed!'}
             
         data = request.get_json()
         item = {'name': name, 'price': data['price']}
